@@ -35,7 +35,8 @@ Atelier Batterie sert à écrire ce genre de partie rapidement, avec une ligne d
   - trois modes de rythme : suivre la grosse caisse (fills compris), jouer une grille pas à pas (fondamentale, quinte, octave), ou rester en silence ;
   - des grilles toutes faites : croches, doubles croches, gallop, noires, blanches, rondes, octaves, fondamentale-quinte-octave, copie de la grosse caisse ;
   - deux façons de jouer, étouffé (palm mute) ou tenu, et une option pour monter d'une octave ;
-  - plusieurs accordages (standard, drop D, un ton plus bas, drop C, 5 cordes) et trois sons d'écoute (aux doigts, au médiator, saturée).
+  - plusieurs accordages (standard, drop D, un ton plus bas, drop C, 5 cordes) et des sons de vraie basse échantillonnée : aux doigts, au médiator, ou saturée pour le metal ;
+  - **votre propre basse** : chargez une ou plusieurs notes (WAV ou MP3). La note est lue dans le nom du fichier (`E1.wav`, `A#2.wav`) ou détectée à l'écoute, et toutes les autres notes sont calculées à partir de l'échantillon le plus proche.
 - **Boutons pour couper** la batterie ou la basse à l'écoute.
 - **Sauvegarde du projet** en `.json`, plus une sauvegarde automatique dans le navigateur.
 
@@ -77,7 +78,7 @@ Si votre plugin utilise une autre correspondance, modifiez-la dans le panneau **
 ## Technique
 
 - Un seul fichier `index.html`, en HTML, CSS et JavaScript, sans framework ni dépendance.
-- Le son passe par la **Web Audio API** : lecture d'échantillons avec plusieurs niveaux de frappe, basse synthétisée par un modèle de corde pincée (Karplus-Strong), réverb à convolution générée par le code, compresseur sur la sortie.
+- Le son passe par la **Web Audio API** : lecture d'échantillons avec plusieurs niveaux de frappe, basse échantillonnée transposée note par note, détection de hauteur des notes chargées par autocorrélation, et une corde synthétisée Karplus-Strong en option légère, réverb à convolution générée par le code, compresseur sur la sortie.
 - Les fichiers MIDI (formats 0 et 1, 480 PPQ) sont écrits directement dans le navigateur.
 - Le projet fonctionne dans les navigateurs récents : Chrome, Edge, Firefox et Safari.
 
@@ -94,6 +95,7 @@ Les contributions et suggestions sont les bienvenues : ouvrez une issue ou une p
 
 ## Crédits et licence
 
+- **Échantillons de basse** : [FluidR3](https://github.com/musescore/MuseScore/tree/master/share/sound) de Frank Wen, dans la version MuseScore General (FluidR3Mono : Michael Cowgill ; adaptation : S. Christian Collins), sous licence MIT.
 - **Échantillons de batterie** : [GMRockKit](https://github.com/hydrogen-music/hydrogen/tree/master/data/drumkits/GMRockKit) de Glen MacArthur et Sebastian Moors, du projet [Hydrogen](http://hydrogen-music.org/), sous licence GPL. La china est dérivée de la crash.
 - **Code** : © Jérôme Debray.
 

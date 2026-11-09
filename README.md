@@ -1,6 +1,6 @@
 # 🥁 Atelier Batterie
 
-**Séquenceur de batterie rock & metal qui tourne dans le navigateur.** Vous construisez la partie de batterie d'un morceau section par section, vous l'écoutez avec un vrai kit acoustique, puis vous l'exportez en MIDI vers votre logiciel de musique (Cakewalk, Reaper, Cubase, Ableton…).
+**Séquenceur de batterie et de basse rock & metal qui tourne dans le navigateur.** Vous construisez la section rythmique d'un morceau section par section, vous l'écoutez avec un vrai kit acoustique et une basse, puis vous l'exportez en MIDI vers votre logiciel de musique (Cakewalk, Reaper, Cubase, Ableton…).
 
 Il n'y a rien à installer : tout tient dans un seul fichier HTML, sons compris.
 
@@ -14,7 +14,7 @@ Il n'y a rien à installer : tout tient dans un seul fichier HTML, sons compris.
 
 Les boucles de batterie, celles d'une pédale d'effet ou d'une boîte à rythmes, tournent vite en rond : le même motif d'un bout à l'autre du morceau, sans break, sans montée, sans fill. Un vrai batteur change de groove entre couplet et refrain, place des fills avant les changements et frappe plus ou moins fort.
 
-Atelier Batterie sert à écrire ce genre de partie rapidement, pour des maquettes guitare rock et metal.
+Atelier Batterie sert à écrire ce genre de partie rapidement, avec une ligne de basse calée dessus, pour des maquettes guitare rock et metal.
 
 ## Fonctionnalités
 
@@ -28,8 +28,15 @@ Atelier Batterie sert à écrire ce genre de partie rapidement, pour des maquett
 - **Kit acoustique échantillonné**, avec 3 niveaux de frappe par élément, et des sons synthétiques en alternative.
 - **Réverb réglable** : type (pièce, studio live, grande salle, plate), niveau, durée et pré-délai, avec une option pour laisser la grosse caisse sans réverb.
 - **Vos propres sons** : vous pouvez remplacer n'importe quel élément du kit par un WAV ou un MP3 à vous.
-- **Export MIDI** (General MIDI, canal 10, tempo et mesure inclus), du morceau entier ou d'une seule section.
+- **Export MIDI** du morceau entier ou d'une seule section, tempo et mesure inclus : un fichier pour la batterie (canal 10), un pour la basse (canal 1) et un fichier complet à deux pistes.
 - **Correspondance des notes MIDI modifiable**, pour s'adapter à votre plugin de batterie.
+- **Partie basse** pour chaque section :
+  - les notes s'écrivent une par mesure, en anglais (`E C G D`) ou en français (`Mi Do Sol Ré`), avec `-` pour un silence ;
+  - trois modes de rythme : suivre la grosse caisse (fills compris), jouer une grille pas à pas (fondamentale, quinte, octave), ou rester en silence ;
+  - des grilles toutes faites : croches, doubles croches, gallop, noires, blanches, rondes, octaves, fondamentale-quinte-octave, copie de la grosse caisse ;
+  - deux façons de jouer, étouffé (palm mute) ou tenu, et une option pour monter d'une octave ;
+  - plusieurs accordages (standard, drop D, un ton plus bas, drop C, 5 cordes) et trois sons d'écoute (aux doigts, au médiator, saturée).
+- **Boutons pour couper** la batterie ou la basse à l'écoute.
 - **Sauvegarde du projet** en `.json`, plus une sauvegarde automatique dans le navigateur.
 
 ## Utilisation
@@ -50,9 +57,9 @@ Ouvrez la page GitHub Pages du projet, ou téléchargez `index.html` et double-c
 
 ### Importer dans Cakewalk (ou un autre logiciel de musique)
 
-1. Cliquez sur **Exporter le MIDI**.
-2. Dans votre logiciel, insérez votre plugin de batterie (EZdrummer, Superior Drummer, Steven Slate Drums, MT Power Drum Kit, GetGood Drums…) en piste **instrument**.
-3. Glissez le fichier `.mid` sur la piste MIDI, au début du projet. Le tempo est inclus dans le fichier.
+1. Cliquez sur **Exporter le MIDI**. Le `.zip` contient `…-batterie.mid`, `…-basse.mid` et `…-complet.mid` (les deux pistes dans un seul fichier).
+2. Dans votre logiciel, insérez votre plugin de batterie (EZdrummer, Superior Drummer, Steven Slate Drums, MT Power Drum Kit, GetGood Drums…) et votre plugin de basse en pistes **instrument**.
+3. Glissez chaque `.mid` sur la piste MIDI du bon plugin, au début du projet. Le tempo est inclus dans les fichiers.
 4. Retouchez si besoin dans le piano roll : chaque section commence sur une nouvelle mesure.
 
 Les notes suivent le standard **General MIDI**, reconnu par la plupart des plugins :
@@ -70,8 +77,8 @@ Si votre plugin utilise une autre correspondance, modifiez-la dans le panneau **
 ## Technique
 
 - Un seul fichier `index.html`, en HTML, CSS et JavaScript, sans framework ni dépendance.
-- Le son passe par la **Web Audio API** : lecture d'échantillons avec plusieurs niveaux de frappe, réverb à convolution générée par le code, compresseur sur la sortie.
-- Le fichier MIDI (format 0, 480 PPQ) est écrit directement dans le navigateur.
+- Le son passe par la **Web Audio API** : lecture d'échantillons avec plusieurs niveaux de frappe, basse synthétisée par un modèle de corde pincée (Karplus-Strong), réverb à convolution générée par le code, compresseur sur la sortie.
+- Les fichiers MIDI (formats 0 et 1, 480 PPQ) sont écrits directement dans le navigateur.
 - Le projet fonctionne dans les navigateurs récents : Chrome, Edge, Firefox et Safari.
 
 ## Pistes d'amélioration
@@ -81,6 +88,7 @@ Si votre plugin utilise une autre correspondance, modifiez-la dans le panneau **
 - [ ] Charley au pied et rimshot
 - [ ] Import d'une piste guitare pour jouer par-dessus
 - [ ] Plusieurs variations de groove dans une même section
+- [ ] Basse : notes de passage, glissés et accords personnalisés
 
 Les contributions et suggestions sont les bienvenues : ouvrez une issue ou une pull request.
 
